@@ -41,6 +41,98 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readlineSync = require('readline-sync');
+
+/**
+ * Calculates the sum of all elements in an array.
+ * @param {number[]} arr 
+ * @returns {number}
+ */
+function calculateSum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+/**
+ * Calculates the average of elements in an array.
+ * @param {number[]} arr 
+ * @returns {number}
+ */
+function calculateAverage(arr) {
+    let sum = calculateSum(arr);
+    return sum / arr.length;
+}
+
+/**
+ * Finds the maximum value in an array.
+ * @param {number[]} arr 
+ * @returns {number}
+ */
+function findMax(arr) {
+    let max = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+/**
+ * Finds the minimum value in an array.
+ * @param {number[]} arr 
+ * @returns {number}
+ */
+function findMin(arr) {
+    let min = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+/**
+ * Main function to run the Array Statistics Calculator program.
+ */
+function main() {
+    // Prompt user for count N
+    const countInput = readlineSync.question('How many numbers? ');
+    const count = Number(countInput);
+
+    // Validate that count is a positive integer (must be > 0)
+    if (isNaN(count) || count <= 0) {
+        console.log('Error: Please enter a positive integer greater than 0.');
+        return;
+    }
+
+    const numbers = [];
+
+    // Collect N numbers from the user
+    for (let i = 1; i <= count; i++) {
+        const numInput = readlineSync.question(`Enter number ${i}: `);
+        numbers.push(Number(numInput));
+    }
+
+    // Compute calculations using individual helper functions
+    const sum = calculateSum(numbers);
+    const average = calculateAverage(numbers);
+    const max = findMax(numbers);
+    const min = findMin(numbers);
+
+    // Display formatted output
+    console.log('\nResults:');
+    console.log(`Sum:     ${sum}`);
+    console.log(`Average: ${average}`);
+    console.log(`Maximum: ${max}`);
+    console.log(`Minimum: ${min}`);
+}
+
+// Run the program
+main(); =============================================================================
 
 
