@@ -52,6 +52,90 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readlineSync = require('readline-sync');
+
+// ==========================================
+// PART A - Print the First N Terms
+// ==========================================
+
+/**
+ * Prompts user for N and prints the first N terms of the Fibonacci sequence.
+ */
+function printFirstNTerms() {
+  console.log('\n--- PART A: Print First N Terms ---');
+  let input = readlineSync.question('How many terms? ');
+  let n = Number(input);
+
+  // Validate that N is a positive integer
+  if (!Number.isInteger(n) || n <= 0) {
+    console.log('Error: Please enter a positive integer.');
+    return;
+  }
+
+  let sequence = [];
+  let a = 0, b = 1;
+
+  for (let i = 0; i < n; i++) {
+    sequence.push(a);
+    let nextTerm = a + b;
+    a = b;
+    b = nextTerm;
+  }
+
+  console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+}
+
+// ==========================================
+// PART B - Check if a Number Belongs to the Sequence
+// ==========================================
+
+/**
+ * Prompts user for a number and checks if it belongs to the Fibonacci sequence.
+ */
+function checkIfFibonacci() {
+  console.log('\n--- PART B: Check Fibonacci Number ---');
+  let input = readlineSync.question('Enter a number to check: ');
+  let target = Number(input);
+
+  // Validate input
+  if (isNaN(target) || target < 0 || !Number.isInteger(target)) {
+    console.log('Error: Please enter a non-negative integer.');
+    return;
+  }
+
+  let a = 0, b = 1;
+  let isFib = false;
+
+  // Generate sequence using a loop until we reach or exceed target
+  while (a <= target) {
+    if (a === target) {
+      isFib = true;
+      break;
+    }
+    let nextTerm = a + b;
+    a = b;
+    b = nextTerm;
+  }
+
+  if (isFib) {
+    console.log(`${target} is a Fibonacci number.`);
+  } else {
+    console.log(`${target} is NOT a Fibonacci number.`);
+  }
+}
+
+// ==========================================
+// MAIN EXECUTION
+// ==========================================
+
+function main() {
+  console.log('=== FIBONACCI SEQUENCE GENERATOR ===');
+  
+  printFirstNTerms();
+  checkIfFibonacci();
+}
+
+main();7
+  oll=============================================================================
 
 
