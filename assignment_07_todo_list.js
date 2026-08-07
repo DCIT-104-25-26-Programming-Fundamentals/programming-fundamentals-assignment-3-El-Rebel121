@@ -79,6 +79,92 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readlineSync = require('readline-sync');
+
+// ==========================================
+// HELPER FUNCTION
+// ==========================================
+
+/**
+ * Validates whether the user input is a positive integer.
+ * @param {string} input - Raw input string from the user
+ * @returns {number|null} The parsed positive integer, or null if invalid
+ */
+function getValidPositiveInteger(promptMessage) {
+  let input = readlineSync.question(promptMessage);
+  let num = Number(input);
+
+  // Check if it's a number, an integer, and greater than 0
+  if (isNaN(num) || !Number.isInteger(num) || num <= 0) {
+    console.log('Error: Invalid input. Please enter a positive integer.');
+    return null;
+  }
+
+  return num;
+}
+
+/**
+ * Helper to print a single multiplication table for a given number.
+ * @param {number} num - The number to generate the table for
+ */
+function printTableForNumber(num) {
+  console.log(`\nMultiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    console.log(`${num} x ${i} = ${num * i}`);
+  }
+}
+
+// ==========================================
+// PART A – Single Table
+// ==========================================
+
+/**
+ * Asks the user for a single number and displays its multiplication table from 1 to 12.
+ */
+function generateSingleTable() {
+  console.log('\n--- PART A: Single Table ---');
+  let num = getValidPositiveInteger('Enter a number: ');
+
+  // Stop if input is invalid
+  if (num === null) return;
+
+  printTableForNumber(num);
+}
+
+// ==========================================
+// PART B – Bonus: Tables from 1 to N
+// ==========================================
+
+/**
+ * Asks the user for N and displays multiplication tables for every number from 1 to N.
+ */
+function generateMultipleTables() {
+  console.log('\n--- PART B: Tables from 1 to N ---');
+  let n = getValidPositiveInteger('Enter a number N: ');
+
+  // Stop if input is invalid
+  if (n === null) return;
+
+  for (let i = 1; i <= n; i++) {
+    printTableForNumber(i);
+    // Add separator line between tables
+    if (i < n) {
+      console.log('----------------------------');
+    }
+  }
+}
+
+// ==========================================
+// MAIN EXECUTION
+// ==========================================
+
+function main() {
+  console.log('=== MULTIPLICATION TABLE GENERATOR ===');
+
+  generateSingleTable();
+  generateMultipleTables();
+}
+
+main(); =============================================================================
 
 
