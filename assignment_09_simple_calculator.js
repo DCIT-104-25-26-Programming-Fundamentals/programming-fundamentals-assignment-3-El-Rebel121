@@ -72,6 +72,166 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readlineSync = require('readline-sync');
+
+// ==========================================
+// ARITHMETIC OPERATION FUNCTIONS
+// ==========================================
+
+/**
+ * Adds two numbers.
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * Subtracts second number from first number.
+ */
+function subtract(a, b) {
+  return a - b;
+}
+
+/**
+ * Multiplies two numbers.
+ */
+function multiply(a, b) {
+  return a * b;
+}
+
+/**
+ * Divides first number by second number.
+ * Throws an error if dividing by zero.
+ */
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot divide by zero.');
+  }
+  return a / b;
+}
+
+/**
+ * Computes remainder of division.
+ * Throws an error if modulus by zero.
+ */
+function modulus(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot perform modulus by zero.');
+  }
+  return a % b;
+}
+
+/**
+ * Computes exponentiation (base ^ exponent).
+ */
+function power(a, b) {
+  return Math.pow(a, b);
+}
+
+// ==========================================
+// HELPER FUNCTIONS
+// ==========================================
+
+/**
+ * Prompts user to enter a valid number.
+ * @param {string} promptMessage - Message to display
+ * @returns {number} Parsed numeric value
+ */
+function getNumberInput(promptMessage) {
+  let input = readlineSync.question(promptMessage);
+  let num = Number(input);
+
+  while (isNaN(num) || input.trim() === '') {
+    console.log('Invalid input! Please enter a valid number.');
+    input = readlineSync.question(promptMessage);
+    num = Number(input);
+  }
+
+  return num;
+}
+
+/**
+ * Displays the main menu choices.
+ */
+function displayMenu() {
+  console.log('\n====================================');
+  console.log('         SIMPLE CALCULATOR          ');
+  console.log('====================================');
+  console.log('1. Addition');
+  console.log('2. Subtraction');
+  console.log('3. Multiplication');
+  console.log('4. Division');
+  console.log('5. Modulus');
+  console.log('6. Exponentiation');
+  console.log('7. Quit');
+}
+
+// ==========================================
+// MAIN EXECUTION LOOP
+// ==========================================
+
+function main() {
+  let running = true;
+
+  while (running) {
+    displayMenu();
+    let choice = readlineSync.question('Select an operation (1-7): ').trim();
+
+    if (choice === '7') {
+      console.log('Goodbye!');
+      running = false;
+      break;
+    }
+
+    // Validate menu option
+    if (!['1', '2', '3', '4', '5', '6'].includes(choice)) {
+      console.log('Invalid choice! Please select an option between 1 and 7.');
+      continue;
+    }
+
+    // Prompts for operands
+    let num1 = getNumberInput('Enter first number: ');
+    let num2 = getNumberInput('Enter second number: ');
+
+    try {
+      let result;
+      let symbol;
+
+      switch (choice) {
+        case '1':
+          result = add(num1, num2);
+          symbol = '+';
+          break;
+        case '2':
+          result = subtract(num1, num2);
+          symbol = '-';
+          break;
+        case '3':
+          result = multiply(num1, num2);
+          symbol = '*';
+          break;
+        case '4':
+          result = divide(num1, num2);
+          symbol = '/';
+          break;
+        case '5':
+          result = modulus(num1, num2);
+          symbol = '%';
+          break;
+        case '6':
+          result = power(num1, num2);
+          symbol = '**';
+          break;
+      }
+
+      // Display results rounded to 2 decimal places
+      console.log(`Result: ${num1} ${symbol} ${num2} = ${result.toFixed(2)}`);
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  }
+}
+
+main(); =============================================================================
 
 
